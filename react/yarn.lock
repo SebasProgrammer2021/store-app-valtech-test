@@ -5459,10 +5459,6 @@ validate-npm-package-license@^3.0.1:
     spdx-correct "^3.0.0"
     spdx-expression-parse "^3.0.0"
 
-"valtech.store-app@https://sebasvaltechdev--valtech.myvtex.com/_v/private/typings/linked/v1/valtech.store-app@0.0.1+build1743259523/public/@types/valtech.store-app":
-  version "0.0.1"
-  resolved "https://sebasvaltechdev--valtech.myvtex.com/_v/private/typings/linked/v1/valtech.store-app@0.0.1+build1743259523/public/@types/valtech.store-app#89f5b83a3fef6236b18a02790f59ee5fa36a2a8e"
-
 verror@1.10.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/verror/-/verror-1.10.0.tgz#3a105ca17053af55d6e270c1f8288682e18da400"
