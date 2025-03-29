@@ -3,10 +3,10 @@ import React, { useState } from 'react'
 import useGetPhrases from './hooks/useGetPhrases'
 import styles from './AppStoreMain.styles.css'
 
-// Componente principal
 const AppStoreMain = () => {
   const [luckyNumber, setLuckyNumber] = useState<string | null>(null)
   const [hasError, setHasError] = useState(false)
+
   // Usamos nuestro hook personalizado
   const { fortune, isLoading, fetchFortune } = useGetPhrases()
 
@@ -39,30 +39,36 @@ const AppStoreMain = () => {
   }
 
   return (
-    <div>
+    <div className={styles['fortune-container']}>
       <button
         onClick={handleClick}
         disabled={isLoading}
         className={styles.button}
       >
-        Conocer mi fortuna
+        {isLoading ? 'Consultando...' : 'Conocer mi fortuna'}
       </button>
-      {isLoading ? (
-        <span className={styles.spinner}>
+
+      {isLoading && (
+        <div className={styles.spinner}>
           <span className={styles.spinner_circle} />
-        </span>
-      ) : null}
+        </div>
+      )}
+
       {/* Mostramos la frase de la fortuna solo si existe */}
-      {fortune && <h3>{fortune.CookieFortune}</h3>}
+      {fortune && (
+        <h3 className={styles['fortune-text']}>{fortune.CookieFortune}</h3>
+      )}
+
       {/* Mostramos el número de la suerte solo si existe */}
       {luckyNumber && (
-        <h5>
+        <h5 className={styles['lucky-number']}>
           Tu número de la suerte es: <strong>{luckyNumber}</strong>
         </h5>
       )}
+
       {/* Mostramos un mensaje de error si ocurre algún problema */}
       {hasError && (
-        <p style={{ color: 'red' }}>
+        <p className={styles['error-message']}>
           ¡Ups! Ocurrió un error al consultar tu fortuna. Inténtalo de nuevo.
         </p>
       )}
