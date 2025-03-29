@@ -48,12 +48,6 @@ const AppStoreMain = () => {
         {isLoading ? 'Consultando...' : 'Conocer mi fortuna'}
       </button>
 
-      {isLoading && (
-        <div className={styles.spinner}>
-          <span className={styles.spinner_circle} />
-        </div>
-      )}
-
       {/* Mostramos la frase de la fortuna solo si existe */}
       {fortune && (
         <h3 className={styles['fortune-text']}>{fortune.CookieFortune}</h3>
@@ -71,6 +65,12 @@ const AppStoreMain = () => {
         <p className={styles['error-message']}>
           ¡Ups! Ocurrió un error al consultar tu fortuna. Inténtalo de nuevo.
         </p>
+      )}
+
+      {isLoading && (
+        <div className={styles.spinner}>
+          <span className={styles.spinner_circle} />
+        </div>
       )}
     </div>
   )
