@@ -19,7 +19,9 @@
     "@vtex/tsconfig": "^0.4.4",
     "apollo-cache-inmemory": "^1.6.5",
     "graphql": "^14.6.0",
-    "typescript": "3.9.7"
+    "typescript": "3.9.7",
+    "valtech.store-app": "https://sebasvaltechdev--valtech.myvtex.com/_v/private/typings/linked/v1/valtech.store-app@0.0.1+build1743259523/public/@types/valtech.store-app",
+    "vtex.render-runtime": "http://vtex.vtexassets.com/_v/public/typings/v1/vtex.render-runtime@8.136.1/public/@types/vtex.render-runtime"
   },
   "resolutions": {
     "@types/jest": "26.0.15"
