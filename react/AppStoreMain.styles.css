@@ -8,6 +8,10 @@
   cursor: pointer;
 }
 
+button:hover{
+  background-color: #4783c8;
+}
+
 .button:disabled {
   opacity: 0.7;
   cursor: not-allowed;
