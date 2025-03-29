@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 
+import useGetPhrases from './hooks/useGetPhrases'
 import styles from './AppStoreMain.styles.css'
 
-// type Props = {
-//   name: string
-// }
-
+// Componente principal
 const AppStoreMain = () => {
-  const [loading, setLoading] = useState(false)
   const [luckyNumber, setLuckyNumber] = useState<string | null>(null)
+  const [hasError, setHasError] = useState(false)
+  // Usamos nuestro hook personalizado
+  const { fortune, isLoading, fetchFortune } = useGetPhrases()
 
   const generateLuckyNumber = () => {
     // Genera 2 números de 2 dígitos y 1 número de 4 dígitos
@@ -19,40 +19,53 @@ const AppStoreMain = () => {
     return `${firstPart}-${secondPart}-${thirdPart}`
   }
 
-  const handleClick = () => {
-    setLoading(true)
-    setLuckyNumber(null) // Resetea el número anterior
+  const handleClick = async () => {
+    // Reseteamos estados
+    setLuckyNumber(null)
+    setHasError(false)
 
-    setTimeout(() => {
-      // Genera el número de la suerte
+    try {
+      // Obtenemos la frase de la fortuna
+      await fetchFortune()
+
+      // Generamos el número de la suerte
       const newLuckyNumber = generateLuckyNumber()
 
       setLuckyNumber(newLuckyNumber)
-      setLoading(false)
-    }, 2000)
+    } catch (error) {
+      console.error('Error al obtener la frase:', error)
+      setHasError(true)
+    }
   }
 
   return (
     <div>
       <button
         onClick={handleClick}
-        disabled={loading}
+        disabled={isLoading}
         className={styles.button}
       >
         Conocer mi fortuna
       </button>
-
-      {loading ? (
+      {isLoading ? (
         <span className={styles.spinner}>
           <span className={styles.spinner_circle} />
         </span>
       ) : null}
-      <h5>
-        {luckyNumber
-          ? `Tu número de la suerte: ${luckyNumber}`
-          : 'Haz clic en "Conocer mi fortuna" para generar un número de la suerte.'}
-      </h5>
-      <h3>deberá mostrar la frase obtenida y almacenada en el estado.</h3>
+      {/* Mostramos la frase de la fortuna solo si existe */}
+      {fortune && <h3>{fortune.CookieFortune}</h3>}
+      {/* Mostramos el número de la suerte solo si existe */}
+      {luckyNumber && (
+        <h5>
+          Tu número de la suerte es: <strong>{luckyNumber}</strong>
+        </h5>
+      )}
+      {/* Mostramos un mensaje de error si ocurre algún problema */}
+      {hasError && (
+        <p style={{ color: 'red' }}>
+          ¡Ups! Ocurrió un error al consultar tu fortuna. Inténtalo de nuevo.
+        </p>
+      )}
     </div>
   )
 }
